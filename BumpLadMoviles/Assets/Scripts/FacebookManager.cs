@@ -94,7 +94,9 @@ public class FacebookManager : MonoBehaviour
     }
     public void FacebookGameRequest()
     {
-        FB.AppRequest("Come play with me this awesome game!");
+        FB.AppRequest("Come play this awesome game!", null, null, null, null, null, null, delegate (IAppRequestResult result) {
+        Debug.Log(result.RawResult);
+        });
     }
 
     public void LogOutOfFacebook() 

@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Creditos.unity
     guid: 3152f1276b3237a498738f3ddb5f5cf8
+  - enabled: 1
+    path: Assets/Scenes/Logs.unity
+    guid: 3434bbdecfc818a499ed318d7e0368f8
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 2b8c2cec85d6d8841ae2efee61d08a43, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 6fc7c2c92b8701f44bb20f8639ad98c8, type: 2}
