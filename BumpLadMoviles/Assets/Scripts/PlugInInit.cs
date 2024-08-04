@@ -18,25 +18,34 @@ public class PlugInInit : MonoBehaviour
     void Start()
     {
         IniciarPlugIn("com.example.unityloggerbumplad.PluginInstance");
+        Debug.Log("Inicia plugin: com.example.unityloggerbumplad.PluginInstance");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void IniciarPlugIn(string pluginName)
     { 
-        unityClass = new AndroidJavaClass("com.example.unityloggerbumplad");
-        unityActivity = unityClass.CallStatic<AndroidJavaObject>("currentActivity");
+        unityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer"); // Probado con  "com.example.unityloggerbumplad" y con "com.Hardgames.com.Juli.BumpLad"
+        unityActivity = unityClass.GetStatic<AndroidJavaObject>("currentActivity");
         _pluginInstance = new AndroidJavaObject(pluginName);
-        if (_pluginInstance != null) 
+        if (_pluginInstance == null) 
         {
             Debug.Log("Plugin Instance error");
         }
+        Debug.Log(unityActivity);
+        _pluginInstance.CallStatic("receiveUnityActivity", unityActivity);
+    }
 
-        _pluginInstance.CallStatic("recieveUnityActivity", unityActivity);
+    public void ScreenMSG(string msg) 
+    {
+        if (_pluginInstance != null) 
+        {
+            _pluginInstance.Call("ScreenMSG", msg);
+        }
     }
 
     public void SendLog(string log) 
@@ -51,7 +60,8 @@ public class PlugInInit : MonoBehaviour
     {
         if (_pluginInstance != null)
         {
-            string LoggerLogs = _pluginInstance.Call<string>("writeToFile");
+            Debug.Log("Plugin Instance encontrado");
+            string LoggerLogs = _pluginInstance.Call<string>("readFile");
 
             return LoggerLogs;
         }

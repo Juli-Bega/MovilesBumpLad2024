@@ -2,6 +2,7 @@ package com.example.unityloggerbumplad;
 
 import android.app.Activity;
 import android.os.Environment;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,11 +14,15 @@ public class PluginInstance {
 
     private static Activity unityActivity;
 
-    public static void recieveUnityActivity (Activity tActivity)
+    public static void receiveUnityActivity (Activity tActivity)
     {
         unityActivity = tActivity;
     }
 
+    public void ScreenMSG(String msg)
+    {
+        Toast.makeText(unityActivity, msg, Toast.LENGTH_SHORT).show();
+    }
 
     public void writeToFile(String newLog) {
 
@@ -41,12 +46,18 @@ public class PluginInstance {
         File logs = new File(fileDirectory + "/Logger.txt") ;
         try{
         fr = new FileReader(logs);
-        return fr.toString();
+        return fileDirectory;
+        //return fr.toString();
         } catch (FileNotFoundException e)
         {
             e.printStackTrace();
             return "Error to load File";
         }
+    }
+    public void deleteFile() {
+        String fileDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getPath();
+        File logs = new File(fileDirectory, "Logger.txt");
+        logs.delete();
     }
 
 }
